@@ -1,101 +1,132 @@
-import Image from "next/image";
+import React from 'react';
 
-export default function Home() {
+const QAInterface = () => {
+  const sidebarLinks = [
+    "My questions",
+    "My answers",
+    "Bookmarks",
+    "Credits"
+  ];
+
+  const answers = [
+    {
+      score: 56,
+      content: "Expert answer to the problem",
+      author: "TechLead",
+      tags: ["Verified"]
+    },
+    {
+      score: 13,
+      content: "AI generated answer based on other questions and documentation",
+      author: "NakamaAI",
+      isDiamond: true
+    },
+    {
+      score: 8,
+      content: "A normal answer presumably",
+      author: "RandoEmployee89"
+    }
+  ];
+
+  const questionTags = ["AI Agents", "Llama3", "AI/ML"];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex min-h-screen bg-white">
+      {/* Sidebar */}
+      <div className="w-64 border-r border-gray-200 p-4">
+        <div className="h-12 mb-8 bg-gray-200 rounded"></div>
+        <nav className="space-y-2">
+          {sidebarLinks.map((link) => (
+            <div key={link} className="text-gray-700 hover:text-gray-900 cursor-pointer py-1">
+              {link}
+            </div>
+          ))}
+        </nav>
+        <div className="mt-8">
+          <button className="w-full p-2 border border-gray-200 rounded text-gray-700 hover:bg-gray-50">
+            Chat with AI
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Main content */}
+      <div className="flex-1 p-4">
+        {/* Search bar */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex-1 mx-4">
+            <input
+              type="text"
+              placeholder="Search things here"
+              className="w-full p-2 border border-gray-200 rounded"
+            />
+          </div>
+          <div className="flex space-x-2">
+            <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+            <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+          </div>
+        </div>
+
+        {/* Question */}
+        <div className="mb-8">
+          <div className="flex items-start space-x-4">
+            <div className="flex flex-col items-center">
+              <button className="text-green-500">▲</button>
+              <span className="my-1">14</span>
+              <button className="text-red-500">▼</button>
+            </div>
+            <div className="flex-1">
+              <h1 className="text-xl font-semibold mb-2">
+                Some question about what's buggin me
+              </h1>
+              <div className="flex items-center text-sm text-gray-600 mb-2">
+                <span>By NoobDev123</span>
+              </div>
+              <div className="flex space-x-2">
+                {questionTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-gray-100 rounded-full text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Answers */}
+        <div className="space-y-4">
+          {answers.map((answer, index) => (
+            <div key={index} className="flex space-x-4 p-4 border border-gray-200 rounded">
+              <div className="flex flex-col items-center">
+                <button className="text-green-500">▲</button>
+                <span className="my-1">{answer.score}</span>
+                <button className="text-red-500">▼</button>
+              </div>
+              <div className="flex-1">
+                <p className="mb-2">{answer.content}</p>
+                <div className="flex items-center text-sm text-gray-600">
+                  <span>By {answer.author}</span>
+                  {answer.isDiamond && (
+                    <span className="ml-2">♦</span>
+                  )}
+                  {answer.tags?.map((tag) => (
+                    <span
+                      key={tag}
+                      className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-800 rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default QAInterface;
